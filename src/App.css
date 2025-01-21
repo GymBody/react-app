@@ -4,14 +4,24 @@ html,
 body {
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
-body {
+/*body {
   text-align: center;
+}*/
+
+.home {
+  margin-top: 30vh;
 }
 
 * {
   font-family: 'Readex Pro', sans-serif;
+}
+
+.primary-title {
+  font-size: 90px;
+  color: rgba(255, 255, 255);
 }
 
 .primary-button {
@@ -24,6 +34,24 @@ body {
   border-radius: 30px;
   border: none;
 }
+
+.secondary-button {
+  color: rgb(121, 119, 119);
+  background-color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: solid 2px rgb(121, 119, 119);
+  margin: 6px;
+}
+
+.secondary-button:hover {
+  color: rgb(48, 48, 48);
+  border: solid 2px rgb(48, 48, 48);
+}
+
 
 .primary-button:hover {
   background: linear-gradient(260deg, rgb(254, 48, 114), rgb(255, 89, 64));
@@ -46,6 +74,11 @@ nav .nav-button {
   margin: 30px;
 }
 
+nav .nav-button:disabled {
+  background-color: rgb(181 180, 180);
+  color: rgb(193, 42, 90);
+}
+
 nav .logo-container {
   width: 170px;
   margin: 15px;
@@ -60,8 +93,42 @@ nav .logo-container .logo {
 .overlay {
   width: 100vw;
   height: 100vh;
-  position: fixed;
+  /*position: fixed;*/
   background: linear-gradient(to bottom,
       rgba(0, 0, 0, 0.65) 0%,
       rgba(0, 0, 0, 0) 100%)
+}
+
+/*. url('images/xxx.png')*/
+
+
+/*-----Auth Model--------*/
+.auth-model {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 360px;
+  height: 600px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 40px;
+}
+
+.auth-model .close-icon {
+  float: right;
+}
+
+.auth-model form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-model input[type=email],
+.auth-model input[type=password] {
+  padding: 8px;
+  margin: 8px;
+  font-size: 17px;
 }
