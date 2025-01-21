@@ -1,4 +1,4 @@
-
+import NavBar from '../components/NavBar'
 
 const Login = () => {
 
@@ -9,6 +9,8 @@ const Login = () => {
     }
 
     return (
+    <>
+        <NavBar/>
         <div>
             <h1>
                 Swipe Right
@@ -18,6 +20,7 @@ const Login = () => {
             </button>
 
         </div>
+    </>
     )
 
 }
