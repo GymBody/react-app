@@ -12,7 +12,6 @@ const Nav = ({ minimal, authToken, setShowModel, showModel, setIsSignUp }) => {
     return (
         <nav>
             <div className="logo-container">
-                {/* change the second 'colorLogo' to black & */}
                 <img className="logo" src={minimal ? colorLogo : bkLogo} />
             </div>
             {!authToken && !minimal && <button
