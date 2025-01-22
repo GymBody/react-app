@@ -26,7 +26,7 @@ const Login = () => {
             />
             <div className="home">
                 <h1 className="primary-title">
-                    Swipe Right
+                    Swipe Right®
                 </h1>
                 <button className="primary-button" onClick={handleClick}>
                     {authToken ? 'Signout' : 'Create AccountE'}
