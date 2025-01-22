@@ -2,6 +2,22 @@ import Nav from '../components/Nav'
 import { useState } from 'react'
 
 const Profile = () => {
+    const [formData, setFormData] = useState({
+        user_id: '',
+        first_name: '',
+        last_name: '',
+        dob_day: '',
+        dob_month: '',
+        dob_year: '',
+        show_gender: false,
+        gender_identity: 'make',
+        gender_interest: 'female',
+        email: '',
+        url: '',
+        about: '',
+        matches: []
+    })
+
     const authToken = true
 
 
@@ -9,13 +25,20 @@ const Profile = () => {
         e.preventDefault()
         console.log("submitted")
     }
-    const handleChange = () => {
-        console.log("submitted")
+    const handleChange = (e) => {
+        //const value = e.target.value
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+        const name = e.target.name
+
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value
+        }))
+
     }
 
     return (
         <>
-            Profile
             <Nav
                 minimal={true}
                 authToken={true}
@@ -34,7 +57,17 @@ const Profile = () => {
                             name="first_name"
                             placeholder="First Name"
                             required={true}
-                            value={""}
+                            value={formData.first_name}
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="last_name">Last Name</label>
+                        <input
+                            id="last_name"
+                            type="text"
+                            name="last_name"
+                            placeholder="Last Name"
+                            required={true}
+                            value={formData.last_name}
                             onChange={handleChange}
                         />
                         <label>Birthday</label>
@@ -45,7 +78,7 @@ const Profile = () => {
                                 name="dob_day"
                                 placeholder="DD"
                                 required={true}
-                                value={""}
+                                value={formData.dob_day}
                                 onChange={handleChange}
                             />
                             <input
@@ -54,7 +87,7 @@ const Profile = () => {
                                 name="dob_month"
                                 placeholder="MM"
                                 required={true}
-                                value={""}
+                                value={formData.dob_month}
                                 onChange={handleChange}
                             />
                             <input
@@ -63,7 +96,7 @@ const Profile = () => {
                                 name="dob_year"
                                 placeholder="YYYY"
                                 required={true}
-                                value={""}
+                                value={formData.dob_year}
                                 onChange={handleChange}
                             />
                         </div>
@@ -77,7 +110,7 @@ const Profile = () => {
                                 name="gender_identity"
                                 value="male"
                                 onChange={handleChange}
-                                checked={false}
+                                checked={formData.gender_identity === 'male'}
                             />
                             <label htmlFor="male_gender_identity">Male</label>
                             <input
@@ -86,7 +119,7 @@ const Profile = () => {
                                 name="gender_identity"
                                 value="female"
                                 onChange={handleChange}
-                                checked={false}
+                                checked={formData.gender_identity === 'female'}
                             />
                             <label htmlFor="female_gender_identity">Female</label>
                         </div>
@@ -97,38 +130,38 @@ const Profile = () => {
                             type="checkbox"
                             name="show_gender"
                             onChange={handleChange}
-                            checked={false}
+                            checked={formData.show_gender}
                         />
 
                         <label>Show Me</label>
                         <div className="multiple-input-container">
                             <input
-                                id="male_gender_identity"
+                                id="male_gender_interest"
                                 type="radio"
-                                name="gender_identity"
+                                name="gender_interest"
                                 value="male"
                                 onChange={handleChange}
-                                checked={false}
+                                checked={formData.gender_interest === 'male'}
                             />
-                            <label htmlFor="male_gender_identity">Male</label>
+                            <label htmlFor="male_gender_interest">Male</label>
                             <input
-                                id="female_gender_identity"
+                                id="female_gender_interest"
                                 type="radio"
-                                name="gender_identity"
+                                name="gender_interest"
                                 value="female"
                                 onChange={handleChange}
-                                checked={false}
+                                checked={formData.gender_interest === 'female'}
                             />
-                            <label htmlFor="female_gender_identity">Female</label>
+                            <label htmlFor="female_gender_interest">Female</label>
                             <input
-                                id="everyone_gender_identity"
+                                id="everyone_gender_interest"
                                 type="radio"
-                                name="gender_identity"
+                                name="gender_interest"
                                 value="everyone"
                                 onChange={handleChange}
-                                checked={false}
+                                checked={formData.gender_interest === 'everyone'}
                             />
-                            <label htmlFor="everyone_gender_identity">Everyone</label>
+                            <label htmlFor="everyone_gender_interest">Everyone</label>
                         </div>
 
                         <label htmlFor="about">About me</label>
@@ -138,7 +171,7 @@ const Profile = () => {
                             name="about"
                             required={true}
                             placeholder="I like long walks .. "
-                            value={""}
+                            value={formData.about}
                             onChange={handleChange}
                         />
                         <input type="submit" />
@@ -154,7 +187,7 @@ const Profile = () => {
                             required={true}
                         />
                         <div className="photo-container">
-
+                            <img src={formData.url} alt="Picture preview" />
                         </div>
 
 

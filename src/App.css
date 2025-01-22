@@ -142,6 +142,10 @@ nav .logo-container .logo {
 
 
 /*-------------------- profileForm ------------------*/
+.profileForm {
+  border-top: solid 1px rgb(154, 154, 154);
+}
+
 
 .profileForm form {
   display: flex;
@@ -205,10 +209,14 @@ nav .logo-container .logo {
   border: solid 2px rgb(221, 39, 22);
 }
 
-.onboarding form input[type="submit"]:hover {
+.profileForm form input[type="submit"]:hover {
   background-color: rgb(235, 235, 235);
 }
 
-.onboarding form input[type="submit"]:active {
+.profileForm form input[type="submit"]:active {
   background-color: rgb(226, 115, 155);
+}
+
+.profileForm form .photo-container img {
+  width: 100%;
 }
