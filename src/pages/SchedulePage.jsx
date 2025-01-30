@@ -1,14 +1,27 @@
-// src/pages/SchedulePage.js
-import React, { useState } from "react";
+import { useState } from "react";
 import ScheduleForm from "../components/ScheduleForm";
 
 const SchedulePage = () => {
-    const [schedule, setSchedule] = useState({});
+    const [schedule, setSchedule] = useState([]);
+
+    // Save the schedule from the form
+    const handleSave = (newSchedule) => {
+        setSchedule(newSchedule);
+    };
 
     return (
         <div>
-            <h1>Manage Your Schedule</h1>
-            <ScheduleForm schedule={schedule} setSchedule={setSchedule} />
+            <h1>Schedule Page</h1>
+            <ScheduleForm onSave={handleSave} />
+
+            <h2>Your Available Time Slots</h2>
+            <ul>
+                {schedule.map((slot, index) => (
+                    <li key={index}>
+                        {slot.start} - {slot.end}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
