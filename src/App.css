@@ -220,3 +220,13 @@ nav .logo-container .logo {
 .profileForm form .photo-container img {
   width: 100%;
 }
+
+
+.ScheduleForm form {
+  background-color: rgb(226, 115, 155);
+  flex-direction: column;
+  display: "flex";
+  justify-items: "center";
+  gap: "10px";
+  margin-left: 500px;
+}
