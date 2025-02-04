@@ -1,13 +1,20 @@
 import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie'
 
 const AuthModule = ({ setShowModel, isSignUp }) => {
+
+    let navigate = useNavigate()
+    const BASE_API = import.meta.env.VITE_API_BASE_URL;
 
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState(null)
     const [error, setError] = useState(null)
+    const [cookies, setCookie, removeCookie] = useCookies(['user'])
 
-    console.log(email, password, confirmPassword)
+    // console.log(email, password, confirmPassword)
 
     //const isSignUp = true
 
@@ -16,14 +23,23 @@ const AuthModule = ({ setShowModel, isSignUp }) => {
     }
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         try {
             if (isSignUp && (password !== confirmPassword)) {
                 setError('Password must be match!')
+                return
             }
 
-            console.log('TODO Post the form the the backend / DB')
+            // console.log('TODO Post the form the the backend / DB')
+            //const response = await axios.post(BASE_API + '/signup', { email, password })
+            const response = await axios.post(BASE_API + `${isSignUp ? '/signup' : '/login'}`, { email, password })
+            setCookie('AuthToken', response.data.token)
+            const success = response.status === 201
+
+            // if (success) navigate('/profile')
+            if (success && isSignUp) navigate('/profile')
+            if (success && !isSignUp) navigate('/weather')
 
         } catch (error) {
             console.log(error)

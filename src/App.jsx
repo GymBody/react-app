@@ -6,6 +6,7 @@ import Search from './pages/Search'
 import Profile from './pages/Profile'
 import WeatherAPI from './components/WeatherAPI'
 import SchedulePage from './pages/SchedulePage';
+import HeightWeightForm from "./components/HeightWeightForm";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/Weather" element={<WeatherAPI />} />
         <Route path="/SchedulePage" element={<SchedulePage />} />
+        <Route path="/height-weight" element={<HeightWeightForm />} />
       </Routes>
     </BrowserRouter>
   )

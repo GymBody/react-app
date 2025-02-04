@@ -1,6 +1,8 @@
 import Nav from '../components/Nav'
 import { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
+import { useCookies } from 'react-cookie'
 const Profile = () => {
     const [formData, setFormData] = useState({
         user_id: '',
@@ -18,13 +20,32 @@ const Profile = () => {
         matches: []
     })
 
-    const authToken = true
+    const [cookies, setCookie, removeCookie] = useCookies(['user'])
+    const navigate = useNavigate(); // React Router navigation
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("submitted")
-    }
+        console.log("Profile submitted:", formData);
+
+        // Example API call
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/profile`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) throw new Error("Failed to save profile");
+
+            console.log("Profile saved:", await response.json());
+            navigate("/height-weight", { state: { userId: formData.user_id } }); // Navigate to next form
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+
+
     const handleChange = (e) => {
         //const value = e.target.value
         const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value

@@ -51,3 +51,12 @@ Replace @material-ui/core and @material-ui/pickers with MUI v5 packages:
 npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/lab @mui/x-date-pickers
 ```
+
+## Use react-cookie
+
+```javascript
+npm i react-cookie
+
+import {useCookies} from 'react-cookie'
+const [cookies, setCookie, removeCookie] = useCookies(['user'])
+```
