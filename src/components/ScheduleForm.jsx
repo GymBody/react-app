@@ -1,15 +1,16 @@
 import { useState } from "react";
 import axios from "axios";
+import { useCookies } from 'react-cookie'
 
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-const ScheduleForm = ({ userId, onSave }) => {
+const ScheduleForm = ({ onSave }) => {
     const [timeSlots, setTimeSlots] = useState([{ day: "", start: "", end: "" }]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-
+    const [cookies, setCookie, removeCookie] = useCookies(['user'])
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Get API base URL from .env
-
+    const userId = cookies.UserId
     // Handle input change
     const handleChange = (index, field, value) => {
         const updatedSlots = [...timeSlots];
@@ -34,6 +35,7 @@ const ScheduleForm = ({ userId, onSave }) => {
         setError("");
 
         try {
+            // const response = await axios.post(`${API_BASE_URL}/schedule`, scheduleData);
             const response = await axios.post(`${API_BASE_URL}/schedule`, {
                 userId,  // Include user ID
                 schedule: timeSlots

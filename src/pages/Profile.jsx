@@ -1,11 +1,13 @@
 import Nav from '../components/Nav'
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-
+import axios from 'axios'
 import { useCookies } from 'react-cookie'
+
 const Profile = () => {
+    const [cookies, setCookie, removeCookie] = useCookies(['user'])
     const [formData, setFormData] = useState({
-        user_id: '',
+        user_id: cookies.UserId,
         first_name: '',
         last_name: '',
         dob_day: '',
@@ -20,31 +22,41 @@ const Profile = () => {
         matches: []
     })
 
-    const [cookies, setCookie, removeCookie] = useCookies(['user'])
+    const BASE_API = import.meta.env.VITE_API_BASE_URL;
     const navigate = useNavigate(); // React Router navigation
 
 
+    /*     const handleSubmit = async (e) => {
+            e.preventDefault()
+            console.log("Profile submitted:", formData);
+    
+            // Example API call
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/profile`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData),
+                });
+    
+                if (!response.ok) throw new Error("Failed to save profile");
+    
+                console.log("Profile saved:", await response.json());
+                navigate("/height-weight", { state: { userId: formData.user_id } }); // Navigate to next form
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }; */
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("Profile submitted:", formData);
-
-        // Example API call
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/profile`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
-            });
-
-            if (!response.ok) throw new Error("Failed to save profile");
-
-            console.log("Profile saved:", await response.json());
-            navigate("/height-weight", { state: { userId: formData.user_id } }); // Navigate to next form
-        } catch (error) {
-            console.error("Error:", error);
+            const response = await axios.put(BASE_API + '/user', { formData })
+            const success = response.status === 200
+            if (success) navigate('/SchedulePage')
+        } catch (err) {
+            console.log(err)
         }
-    };
 
+    }
 
     const handleChange = (e) => {
         //const value = e.target.value
@@ -208,7 +220,7 @@ const Profile = () => {
                             required={true}
                         />
                         <div className="photo-container">
-                            <img src={formData.url} alt="Picture preview" />
+                            {formData.url && <img src={formData.url} alt="Picture preview" />}
                         </div>
 
 
