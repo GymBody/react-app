@@ -2,11 +2,15 @@ import { useState, useEffect } from "react";
 import ScheduleForm from "../components/ScheduleForm";
 import axios from "axios";
 import Nav from '../components/Nav'
+import { useCookies } from 'react-cookie'
 
-const SchedulePage = ({ userId }) => {
+const SchedulePage = () => {
     const [schedule, setSchedule] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [cookies, setCookie, removeCookie] = useCookies(['user'])
+
+    const userId = cookies.UserId
 
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Get API base URL
 
@@ -15,6 +19,7 @@ const SchedulePage = ({ userId }) => {
         const fetchSchedule = async () => {
             try {
                 const response = await axios.get(`${API_BASE_URL}/schedule?userId=${userId}`);
+
                 setSchedule(response.data.schedule);
             } catch (err) {
                 console.error("Error fetching schedule:", err);

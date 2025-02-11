@@ -34,12 +34,15 @@ const AuthModule = ({ setShowModel, isSignUp }) => {
             // console.log('TODO Post the form the the backend / DB')
             //const response = await axios.post(BASE_API + '/signup', { email, password })
             const response = await axios.post(BASE_API + `${isSignUp ? '/signup' : '/login'}`, { email, password })
+
             setCookie('AuthToken', response.data.token)
+            setCookie('UserId', response.data.userId)
+
             const success = response.status === 201
 
             // if (success) navigate('/profile')
             if (success && isSignUp) navigate('/profile')
-            if (success && !isSignUp) navigate('/weather')
+            if (success && !isSignUp) navigate('/SchedulePage')
 
         } catch (error) {
             console.log(error)
