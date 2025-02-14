@@ -9,7 +9,7 @@ const ScheduleForm = ({ onSave }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [cookies, setCookie, removeCookie] = useCookies(['user'])
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Get API base URL from .env
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Get API base URL from .env file.
     const userId = cookies.UserId
     // Handle input change
     const handleChange = (index, field, value) => {
